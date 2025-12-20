@@ -1,0 +1,177 @@
+.container {
+  position: absolute;
+  z-index: 1;
+  background: linear-gradient(135deg, #5858e6, #6a11cb);
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid rgba(0, 123, 255, 0.7);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 300px;
+  max-width: 90vw;
+}
+
+.container:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35), 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.75rem;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.input:disabled {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.55);
+
+  cursor: not-allowed;
+
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.35);
+}
+
+.input:disabled::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.sendButton {
+  padding: 0 0.9rem;
+  border-radius: 0.75rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.sendButton svg {
+  stroke-width: 2;
+}
+
+.sendButton:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.sendButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sendButton:disabled svg {
+  opacity: 0.7;
+}
+
+.recordButton {
+  margin-top: 0.75rem;
+  width: 100%;
+  padding: 0.6rem;
+
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+
+  background: rgba(0, 0, 0, 0.25);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.recordButton:hover {
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.recording {
+  background: rgba(255, 60, 60, 0.85);
+  animation: pulse 1.4s infinite;
+}
+
+.recording:hover {
+  background: rgba(255, 60, 60, 0.9);
+  animation: pulse 1.4s infinite;
+}
+
+/* ICON */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recordButton svg {
+  stroke-width: 2;
+}
+.recording svg {
+  animation: micPulse 1.2s infinite;
+}
+
+.unsupported {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: none;
+  animation: none;
+}
+
+.disabled:hover {
+  transform: none;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 60, 60, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(255, 60, 60, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 60, 60, 0);
+  }
+}
+
+@keyframes micPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
