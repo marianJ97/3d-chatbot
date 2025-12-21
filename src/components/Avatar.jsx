@@ -33,7 +33,7 @@ export function Avatar(props) {
   const handleEnded = () => {
     startTransition(() => {
       setAnimation("Idle");
-      setFacialExpression("default");
+      setFacialExpression(expressionType.default);
       setMessage(null);
       setAction(avatarState.idle);
     });
@@ -63,7 +63,9 @@ export function Avatar(props) {
   }, [animation, actions]);
 
   useEffect(() => {
-    if (!message) return;
+    if (!message) {
+      return setFacialExpression(expressionType.default);
+    }
 
     startTransition(() => {
       setAnimation(message.animation);
@@ -75,6 +77,10 @@ export function Avatar(props) {
       audio.current.pause();
       audio.current.removeEventListener("ended", handleEnded);
       audio.current = null;
+    }
+
+    if (!message.audio) {
+      return handleEnded();
     }
 
     const audioFile = new Audio("data:audio/mp3;base64," + message.audio);

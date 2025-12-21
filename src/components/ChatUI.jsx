@@ -5,7 +5,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import { Mic, Square, MicOff, Send } from "lucide-react";
 import styles from "./ChatUI.module.css";
-import { avatarState } from "../utils/helperConfig";
+import { avatarState, expressionType } from "../utils/helperConfig";
 import TalkingPopup from "./TalkingPopup";
 
 const backendUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -41,12 +41,28 @@ export default function ChatUI() {
         signal: abortRef.current.signal,
       });
 
+      if (!res.ok) {
+        const error = await res.json();
+        console.log("error triggered: ", error);
+
+        setMessage({
+          animation: "Talking_1",
+          text: error?.message ?? "Something went wrong on our side",
+          facialExpression: expressionType.sad,
+          audio: error?.audio ?? null,
+        });
+
+        return setAction(
+          error?.audio ? avatarState.speaking : avatarState.idle
+        );
+      }
+
       setAction(avatarState.speaking);
 
       const data = await res.json();
       setMessage(data);
     } catch (error) {
-      console.error(error);
+      console.error("Error during fetching: ", error);
       setAction(avatarState.idle);
     }
   };
